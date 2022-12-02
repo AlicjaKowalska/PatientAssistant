@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">PatientAssistant</string>
+    <string name="medical_appointment_header">Medical appointment</string>
+    <string name="edit_text_medical_appointment_title">Title</string>
+    <string name="edit_text_medical_appointment_medical_facility">Medical facility</string>
+    <string name="edit_text_medical_facility">Medical Facility</string>
+    <string name="edit_text_hint_date">Date</string>
+    <string name="edit_text_hint_time">Time</string>
+    <string name="button_save">SAVE</string>
     <string-array name="drug_interval">
         <item>Every 24h</item>
         <item>Every 12h</item>
