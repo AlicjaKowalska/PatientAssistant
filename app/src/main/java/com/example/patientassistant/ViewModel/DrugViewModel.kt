@@ -8,6 +8,8 @@ import kotlinx.coroutines.launch
 
 class DrugViewModel(private val drugRepository: DrugRepository) : ViewModel() {
 
+    val allDrugs: LiveData<List<Drug>> = drugRepository.allDrugs.asLiveData()
+
         fun insert(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
             drugRepository.insert(drug)
         }

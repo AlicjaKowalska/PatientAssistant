@@ -18,6 +18,11 @@ import java.util.*
 
 class FragmentDrugForm : Fragment(), TimePickerDialog.OnTimeSetListener {
 
+    private lateinit var binding: FragmentDrugFormBinding
+    private lateinit var drugActivity: DrugActivity
+    private val calendar = Calendar.getInstance()
+    private val formatter = SimpleDateFormat("hh:mm", Locale.getDefault())
+
     inner class TextFieldValidation(private val view: View) : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
@@ -44,10 +49,6 @@ class FragmentDrugForm : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     }
 
-    private lateinit var binding: FragmentDrugFormBinding
-    private val calendar = Calendar.getInstance()
-    private val formatter = SimpleDateFormat("hh:mm", Locale.getDefault())
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -57,6 +58,7 @@ class FragmentDrugForm : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        drugActivity = activity as DrugActivity
         setupListeners()
     }
 
@@ -71,7 +73,6 @@ class FragmentDrugForm : Fragment(), TimePickerDialog.OnTimeSetListener {
                 return@setOnClickListener
             }
             saveDrug()
-            //close fragment and go back to list of drugs
         }
 
         binding.doseTime.setOnClickListener {
@@ -93,8 +94,8 @@ class FragmentDrugForm : Fragment(), TimePickerDialog.OnTimeSetListener {
         val interval: Int = binding.doseInterval.text.toString().toInt()
 
         val drug = Drug(drugName, dose, hour, minute, interval)
-        val drugActivity = activity as DrugActivity
         drugActivity.drugViewModel.insert(drug)
+        drugActivity.supportFragmentManager.popBackStack()
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
