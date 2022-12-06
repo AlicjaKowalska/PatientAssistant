@@ -3,8 +3,11 @@ package com.example.patientassistant.Repository
 import androidx.annotation.WorkerThread
 import com.example.patientassistant.Model.Drug
 import com.example.patientassistant.Room.DrugDAO
+import kotlinx.coroutines.flow.Flow
 
 class DrugRepository (private val drugDAO: DrugDAO) {
+
+    val allDrugs: Flow<List<Drug>> = drugDAO.getAllDrugs()
 
     @WorkerThread //annotations can be done in a single thread
     suspend fun insert(drug : Drug) {
