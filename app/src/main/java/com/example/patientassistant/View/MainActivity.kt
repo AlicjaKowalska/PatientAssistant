@@ -21,8 +21,5 @@ class MainActivity : AppCompatActivity() {
         val appointmentViewModelFactory = AppointmentViewModelFactory((application as PatientApplication).appointmentRepository)
 
         appointmentViewModel = ViewModelProvider(this, appointmentViewModelFactory)[AppointmentViewModel::class.java]
-
-//        val appointment = Appointment("AppointmentTitle", 10, 12, 2022, "Address", 15, 30)
-//        appointmentViewModel.insert(appointment)
     }
 }

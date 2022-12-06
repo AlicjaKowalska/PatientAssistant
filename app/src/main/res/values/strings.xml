@@ -1,18 +1,12 @@
 <resources>
     <string name="app_name">PatientAssistant</string>
-    <string-array name="drug_interval">
-        <item>Every 24h</item>
-        <item>Every 12h</item>
-        <item>Every 8h</item>
-        <item>Every 6h</item>
-    </string-array>
-    <string-array name="dosage_units">
-        <item>pill</item>
-        <item>ml</item>
-        <item>mg</item>
-        <item>g</item>
-        <item>cc</item>
-    </string-array>
+
+    <string name="add_new">Add new</string>
+
+    <string name="drug_details_dose_singular">%1$d tablet</string>
+    <string name="drug_details_dose_plural">%1$d tablets</string>
+    <string name="drug_details_interval_one_hour">every hour</string>
+    <string name="drug_details_interval">every %1$d hours</string>
 
     <string name="error_required">This field is required</string>
     <string name="error_dose_lesser_equal_0">Dose cannot be 0 or less</string>
