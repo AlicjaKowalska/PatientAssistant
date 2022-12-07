@@ -13,6 +13,8 @@
         android:theme="@style/Theme.PatientAssistant"
         tools:targetApi="31">
         <activity
+            android:name=".View.MedicalAppointmentsActivity" />
+        <activity
             android:name=".View.MainActivity"
             android:exported="true">
             <intent-filter>
