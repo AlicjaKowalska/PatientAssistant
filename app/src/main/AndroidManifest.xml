@@ -14,7 +14,7 @@
         android:theme="@style/Theme.PatientAssistant"
         tools:targetApi="31">
         <activity
-            android:name=".MedicalAppointment"
+            android:name=".View.MedicalAppointment"
             android:exported="false"
             android:label="MedicalAppointment">
             <meta-data

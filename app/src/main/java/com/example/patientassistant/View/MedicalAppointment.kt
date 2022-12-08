@@ -1,19 +1,15 @@
-package com.example.patientassistant
+package com.example.patientassistant.View
 
 import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
 import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatEditText
+import com.example.patientassistant.R
 import kotlinx.android.synthetic.main.activity_medical_apointment.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MedicalAppointment : AppCompatActivity() {
 
