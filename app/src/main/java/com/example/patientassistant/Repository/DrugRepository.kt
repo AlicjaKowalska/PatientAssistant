@@ -18,4 +18,14 @@ class DrugRepository (private val drugDAO: DrugDAO) {
     suspend fun update(drug : Drug) {
         drugDAO.update(drug)
     }
+
+    @WorkerThread
+    suspend fun delete(drug: Drug) {
+        drugDAO.delete(drug)
+    }
+
+    @WorkerThread
+    suspend fun deleteAllDrugs() {
+        drugDAO.deleteAllDrugs()
+    }
 }

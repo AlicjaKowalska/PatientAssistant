@@ -17,6 +17,14 @@ class AppointmentViewModel(private val appointmentRepository: AppointmentReposit
     fun update(appointment: Appointment) = viewModelScope.launch(Dispatchers.IO) {
         appointmentRepository.update(appointment)
     }
+
+    fun delete(appointment: Appointment) = viewModelScope.launch(Dispatchers.IO) {
+        appointmentRepository.delete(appointment)
+    }
+
+    fun deleteAllAppointments(appointment: Appointment) = viewModelScope.launch(Dispatchers.IO) {
+        appointmentRepository.deleteAllAppointments()
+    }
 }
 
 class AppointmentViewModelFactory(private var repository: AppointmentRepository) : ViewModelProvider.Factory {

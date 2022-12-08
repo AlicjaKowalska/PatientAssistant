@@ -18,4 +18,14 @@ class AppointmentRepository (private val appointmentDAO: AppointmentDAO) {
     suspend fun update(appointment : Appointment) {
         appointmentDAO.update(appointment)
     }
+
+    @WorkerThread
+    suspend fun delete(appointment: Appointment) {
+        appointmentDAO.delete(appointment)
+    }
+
+    @WorkerThread
+    suspend fun deleteAllAppointments() {
+        appointmentDAO.deleteAllAppointments()
+    }
 }

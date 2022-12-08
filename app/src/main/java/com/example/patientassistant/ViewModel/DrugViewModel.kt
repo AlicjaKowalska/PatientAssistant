@@ -17,6 +17,14 @@ class DrugViewModel(private val drugRepository: DrugRepository) : ViewModel() {
         fun update(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
             drugRepository.update(drug)
         }
+
+        fun delete(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
+            drugRepository.delete(drug)
+        }
+
+        fun deleteAllDrugs(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
+            drugRepository.deleteAllDrugs()
+        }
 }
 
 class DrugViewModelFactory(private var repository: DrugRepository) : ViewModelProvider.Factory {
