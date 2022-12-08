@@ -1,10 +1,9 @@
 package com.example.patientassistant.View
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import com.example.patientassistant.Model.Appointment
-import com.example.patientassistant.Model.Drug
 import com.example.patientassistant.PatientApplication
 import com.example.patientassistant.R
 import com.example.patientassistant.ViewModel.AppointmentViewModel
@@ -26,6 +25,10 @@ class MainActivity : AppCompatActivity() {
 
         drugViewModel = ViewModelProvider(this, drugViewModelFactory)[DrugViewModel::class.java]
         appointmentViewModel = ViewModelProvider(this, appointmentViewModelFactory)[AppointmentViewModel::class.java]
+
+
+        val intent = Intent(this@MainActivity, MedicalAppointment::class.java)
+        startActivity(intent)
 
 //        val drug = Drug("DrugName", 1, 10, 10, 1)
 //        val appointment = Appointment("AppointmentTitle", 10, 12, 2022, "Address")
