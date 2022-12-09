@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         appointmentViewModel = ViewModelProvider(this, appointmentViewModelFactory)[AppointmentViewModel::class.java]
 
-//        val appointment = Appointment("AppointmentTitle", 10, 12, 2022, "Address")
+//        val appointment = Appointment("AppointmentTitle", 10, 12, 2022, "Address", 15, 30)
 //        appointmentViewModel.insert(appointment)
     }
 }

@@ -8,6 +8,8 @@ import kotlinx.coroutines.launch
 
 class AppointmentViewModel(private val appointmentRepository: AppointmentRepository) : ViewModel() {
 
+    val myAllAppointments : LiveData<List<Appointment>> = appointmentRepository.myAllAppointments.asLiveData()
+
     fun insert(appointment: Appointment) = viewModelScope.launch(Dispatchers.IO) {
         appointmentRepository.insert(appointment)
     }
