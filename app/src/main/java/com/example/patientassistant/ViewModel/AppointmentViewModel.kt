@@ -3,6 +3,7 @@ package com.example.patientassistant.ViewModel
 import androidx.lifecycle.*
 import com.example.patientassistant.Model.Appointment
 import com.example.patientassistant.Repository.AppointmentRepository
+import com.example.patientassistant.View.MedicalAppointment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

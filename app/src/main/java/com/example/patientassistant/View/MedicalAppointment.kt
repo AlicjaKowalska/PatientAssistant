@@ -6,7 +6,12 @@ import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import com.example.patientassistant.Model.Appointment
+import com.example.patientassistant.PatientApplication
 import com.example.patientassistant.R
+import com.example.patientassistant.ViewModel.AppointmentViewModel
+import com.example.patientassistant.ViewModel.AppointmentViewModelFactory
 import kotlinx.android.synthetic.main.activity_medical_apointment.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -16,6 +21,8 @@ class MedicalAppointment : AppCompatActivity() {
     private val calendar = Calendar.getInstance()
     private lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
     private lateinit var timeSetListener: TimePickerDialog.OnTimeSetListener
+
+    lateinit var appointmentViewModel: AppointmentViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,11 +84,16 @@ class MedicalAppointment : AppCompatActivity() {
                     this@MedicalAppointment,
                     "Please enter a time",
                     Toast.LENGTH_SHORT).show()
-            else
-                Toast.makeText(
-                    this@MedicalAppointment,
-                    "Correct",
-                    Toast.LENGTH_SHORT).show()
+            else {
+                val title = edit_text_Title.text.toString()
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
+                val month = calendar.get(Calendar.MONTH)
+                val year = calendar.get(Calendar.YEAR)
+                val facility = edit_text_medical_facility.toString()
+
+                val newAppointment = Appointment(title, day, month, year, facility)
+                insertToDatabase(newAppointment)
+            }
         }
     }
 
@@ -95,6 +107,17 @@ class MedicalAppointment : AppCompatActivity() {
         val formatPresentTime = "hh:mm"
         val simpleDateFormat = SimpleDateFormat(formatPresentTime, Locale.getDefault())
         edit_text_Time.setText(simpleDateFormat.format(calendar.time).toString())
+    }
+
+    private fun insertToDatabase(appointment: Appointment) {
+        val appointmentViewModelFactory = AppointmentViewModelFactory(
+            (application as PatientApplication).appointmentRepository)
+        appointmentViewModel = ViewModelProvider(
+            this, appointmentViewModelFactory)[AppointmentViewModel::class.java]
+
+        appointmentViewModel.insert(appointment)
+
+        Toast.makeText(this@MedicalAppointment, "toast from fun", Toast.LENGTH_SHORT).show()
     }
 
 
