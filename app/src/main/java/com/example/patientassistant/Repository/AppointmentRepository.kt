@@ -10,4 +10,9 @@ class AppointmentRepository (private val appointmentDAO: AppointmentDAO) {
     suspend fun insert(appointment : Appointment) {
         appointmentDAO.insert(appointment)
     }
+
+    @WorkerThread
+    suspend fun update(appointment : Appointment) {
+        appointmentDAO.update(appointment)
+    }
 }

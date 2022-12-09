@@ -11,6 +11,10 @@ class AppointmentViewModel(private val appointmentRepository: AppointmentReposit
     fun insert(appointment: Appointment) = viewModelScope.launch(Dispatchers.IO) {
         appointmentRepository.insert(appointment)
     }
+
+    fun update(appointment: Appointment) = viewModelScope.launch(Dispatchers.IO) {
+        appointmentRepository.update(appointment)
+    }
 }
 
 class AppointmentViewModelFactory(private var repository: AppointmentRepository) : ViewModelProvider.Factory {

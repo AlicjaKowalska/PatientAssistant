@@ -10,4 +10,9 @@ class DrugRepository (private val drugDAO: DrugDAO) {
     suspend fun insert(drug : Drug) {
         drugDAO.insert(drug)
     }
+
+    @WorkerThread
+    suspend fun update(drug : Drug) {
+        drugDAO.update(drug)
+    }
 }
