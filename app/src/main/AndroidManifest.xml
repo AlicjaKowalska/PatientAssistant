@@ -15,6 +15,10 @@
         <activity
             android:name=".View.MedicalAppointmentsActivity" />
         <activity
+            android:name=".View.DrugActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".View.MainActivity"
             android:exported="true">
             <intent-filter>
