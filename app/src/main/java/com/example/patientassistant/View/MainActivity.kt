@@ -3,28 +3,29 @@ package com.example.patientassistant.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.patientassistant.PatientApplication
+import com.example.patientassistant.R
 import com.example.patientassistant.ViewModel.AppointmentViewModel
 import com.example.patientassistant.ViewModel.AppointmentViewModelFactory
-import com.example.patientassistant.databinding.ActivityMainBinding
+import com.example.patientassistant.ViewModel.DrugViewModel
+import com.example.patientassistant.ViewModel.DrugViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var appointmentViewModel: AppointmentViewModel
-    lateinit var binding: ActivityMainBinding
+    lateinit var drugViewModel: DrugViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
+        val drugViewModelFactory = DrugViewModelFactory((application as PatientApplication).drugRepository)
         val appointmentViewModelFactory = AppointmentViewModelFactory((application as PatientApplication).appointmentRepository)
 
+        drugViewModel = ViewModelProvider(this, drugViewModelFactory)[DrugViewModel::class.java]
         appointmentViewModel = ViewModelProvider(this, appointmentViewModelFactory)[AppointmentViewModel::class.java]
 
-//        val appointment = Appointment("AppointmentTitle", 10, 12, 2022, "Address", 15, 30)
 
         val intent = Intent(this@MainActivity, MedicalAppointment::class.java)
         startActivity(intent)
