@@ -11,6 +11,10 @@ class DrugViewModel(private val drugRepository: DrugRepository) : ViewModel() {
         fun insert(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
             drugRepository.insert(drug)
         }
+
+        fun update(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
+            drugRepository.update(drug)
+        }
 }
 
 class DrugViewModelFactory(private var repository: DrugRepository) : ViewModelProvider.Factory {

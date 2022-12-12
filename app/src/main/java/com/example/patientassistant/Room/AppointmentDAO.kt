@@ -13,4 +13,7 @@ interface AppointmentDAO {
     @Query("SELECT * FROM appointment_table ORDER BY id ASC")
     fun getAllAppointments() : Flow<List<Appointment>>
 
+    @Update
+    suspend fun update(appointment: Appointment)
+
 }
