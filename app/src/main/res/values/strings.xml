@@ -33,6 +33,13 @@
     <string name="appointment_reminders">Appointment Reminders</string>
     <string name="appointment_coming_up">You have an appointment coming up</string>
 
+    <string name="medical_appointment_header">Medical appointment</string>
+    <string name="edit_text_medical_appointment_title">Title</string>
+    <string name="edit_text_medical_appointment_medical_facility">Medical facility</string>
+    <string name="edit_text_medical_facility">Medical Facility</string>
+    <string name="edit_text_hint_date">Date</string>
+    <string name="edit_text_hint_time">Time</string>
+
     <string name="drug_taking_notification_title">"Take your drug: %s!"</string>
     <string name="drug_taking_notification_content_text">"Dose: %s tablets"</string>
     <string name="notification_channel_name">"Take drug Reminders"</string>

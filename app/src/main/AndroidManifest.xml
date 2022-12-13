@@ -14,12 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PatientAssistant"
         tools:targetApi="31">
-        <activity
-            android:name=".View.MedicalAppointmentsActivity" />
-        <activity
-            android:name=".View.DrugActivity"
-            android:exported="false">
-        </activity>
+        <activity android:name=".View.MedicalAppointmentFormActivity" />
+        <activity android:name=".View.MedicalAppointmentsActivity" />
+        <activity android:name=".View.DrugActivity" />
         <activity
             android:name=".View.MainActivity"
             android:exported="true">
