@@ -32,4 +32,10 @@
 
     <string name="appointment_reminders">Appointment Reminders</string>
     <string name="appointment_coming_up">You have an appointment coming up</string>
+
+    <string name="drug_taking_notification_title">"Take your drug: %s!"</string>
+    <string name="drug_taking_notification_content_text">"Dose: %s tablets"</string>
+    <string name="notification_channel_name">"Take drug Reminders"</string>
+    <string name="notification_description_text">"This channel sends reminders to take your drug"</string>
+
 </resources>
