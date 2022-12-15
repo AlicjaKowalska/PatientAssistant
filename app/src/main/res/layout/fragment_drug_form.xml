@@ -6,14 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.FragmentDrugForm" >
 
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/edit"
+        android:text="@string/edit"
+        app:layout_constraintEnd_toEndOf="@+id/scrollViewDrugForm"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/delete"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/scrollViewDrugForm"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/buttonEdit">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
                 android:gravity="center"
-                android:text="@string/drug_fragment_title"
+                android:text="@string/drug_add_new_title"
                 android:textSize="24sp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -100,7 +121,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonSubmitDrugForm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

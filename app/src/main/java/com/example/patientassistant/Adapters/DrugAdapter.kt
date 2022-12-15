@@ -1,4 +1,4 @@
-package com.example.patientassistant.adapters
+package com.example.patientassistant.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import com.example.patientassistant.Model.Drug
 import com.example.patientassistant.R
 import com.example.patientassistant.databinding.DrugItemBinding
 
-class DrugAdapter : RecyclerView.Adapter<DrugAdapter.DrugViewHolder>() {
+class DrugAdapter(private val clickListener: (Drug) -> Unit) : RecyclerView.Adapter<DrugAdapter.DrugViewHolder>() {
 
     lateinit var context: Context
     private var drugs: List<Drug> = ArrayList()
@@ -41,6 +41,9 @@ class DrugAdapter : RecyclerView.Adapter<DrugAdapter.DrugViewHolder>() {
             tvDrugCapital.text = drugName.uppercase()[0].toString()
             tvDrugName.text = drugName
             tvDrugSupportText.text = drugSupportText
+        }
+        holder.itemView.setOnClickListener{
+            clickListener(currentDrug)
         }
     }
 

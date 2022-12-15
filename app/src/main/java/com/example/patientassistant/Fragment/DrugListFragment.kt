@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.patientassistant.Adapters.DrugAdapter
+import com.example.patientassistant.Objects.DrugFormConstants
 import com.example.patientassistant.R
 import com.example.patientassistant.View.DrugActivity
-import com.example.patientassistant.adapters.DrugAdapter
 import com.example.patientassistant.databinding.FragmentDrugListBinding
 
 class DrugListFragment : Fragment() {
@@ -30,7 +30,16 @@ class DrugListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         drugActivity = activity as DrugActivity
 
-        val drugAdapter = DrugAdapter()
+        val drugAdapter = DrugAdapter() {
+            drugActivity.supportFragmentManager.commit{
+                val fragmentDrugForm = FragmentDrugForm(it)
+                val arguments = Bundle()
+                arguments.putInt(DrugFormConstants.FORM_VARIANT_KEY, DrugFormConstants.FORM_VARIANT_DETAILS)
+                fragmentDrugForm.arguments = arguments
+                replace(R.id.drugContainer, fragmentDrugForm)
+                addToBackStack("form")
+            }
+        }
         binding.recyclerViewDrugs.layoutManager = LinearLayoutManager(drugActivity)
         binding.recyclerViewDrugs.adapter = drugAdapter
 
@@ -44,7 +53,11 @@ class DrugListFragment : Fragment() {
     private fun setupAddDrugListener() {
         binding.floatingActionButtonAddDrug.setOnClickListener {
             drugActivity.supportFragmentManager.commit {
-                replace<FragmentDrugForm>(R.id.drugContainer)
+                val fragmentDrugForm = FragmentDrugForm(null)
+                val arguments = Bundle()
+                arguments.putInt(DrugFormConstants.FORM_VARIANT_KEY, DrugFormConstants.FORM_VARIANT_ADD)
+                fragmentDrugForm.arguments = arguments
+                replace(R.id.drugContainer, fragmentDrugForm)
                 addToBackStack("form")
             }
         }

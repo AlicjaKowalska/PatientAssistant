@@ -12,10 +12,19 @@
     <string name="error_dose_lesser_equal_0">Dose cannot be 0 or less</string>
     <string name="error_dose_interval_lesser_equal_0">Dose interval cannot be 0 or less</string>
 
-    <string name="drug_fragment_title">Add drug to database</string>
+    <string name="drug_delete_dialog_title">Delete this drug?</string>
+    <string name="drug_delete_dialog_message">Are you sure you want to delete this drug? You can not revert this action.</string>
+    <string name="drug_add_new_title">Add drug to database</string>
+    <string name="drug_details_title">Drug details</string>
+    <string name="drug_edit_title">Edit drug</string>
     <string name="hint_drug_name">Drug name</string>
     <string name="hint_dose">Dose</string>
     <string name="hint_select_date">Time of first dose</string>
     <string name="hint_dose_interval">Dose interval</string>
+
+    <string name="warning">Warning</string>
     <string name="submit">Submit</string>
+    <string name="edit">edit</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">delete</string>
 </resources>
