@@ -1,5 +1,6 @@
 package com.example.patientassistant.Fragment
 
+import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.Editable
@@ -10,18 +11,20 @@ import android.view.ViewGroup
 import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import com.example.patientassistant.Model.Drug
+import com.example.patientassistant.Objects.DrugFormConstants
 import com.example.patientassistant.R
 import com.example.patientassistant.View.DrugActivity
 import com.example.patientassistant.databinding.FragmentDrugFormBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class FragmentDrugForm : Fragment(), TimePickerDialog.OnTimeSetListener {
+class FragmentDrugForm(private var drug: Drug?) : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     private lateinit var binding: FragmentDrugFormBinding
     private lateinit var drugActivity: DrugActivity
+    private var variant = 0
     private val calendar = Calendar.getInstance()
-    private val formatter = SimpleDateFormat("hh:mm", Locale.getDefault())
+    private val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
 
     inner class TextFieldValidation(private val view: View) : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -53,6 +56,15 @@ class FragmentDrugForm : Fragment(), TimePickerDialog.OnTimeSetListener {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentDrugFormBinding.inflate(inflater, container, false)
+        variant = requireArguments().getInt(DrugFormConstants.FORM_VARIANT_KEY, DrugFormConstants.FORM_VARIANT_ADD)
+        when (variant) {
+            DrugFormConstants.FORM_VARIANT_ADD ->
+                setAddingView()
+            DrugFormConstants.FORM_VARIANT_DETAILS ->
+                setDetailsView()
+            DrugFormConstants.FORM_VARIANT_EDIT ->
+                setEditView()
+        }
         return binding.root
     }
 
@@ -68,13 +80,107 @@ class FragmentDrugForm : Fragment(), TimePickerDialog.OnTimeSetListener {
         binding.doseInterval.addTextChangedListener(TextFieldValidation(binding.doseInterval))
         binding.doseTime.addTextChangedListener(TextFieldValidation(binding.doseTime))
 
-        binding.button.setOnClickListener {
-            if (!validateDrugName() || !validateDose() || !validateDoseInterval() || !validateTime()) {
-                return@setOnClickListener
-            }
-            saveDrug()
-        }
+        setupDoseTimeListener()
+    }
 
+    private fun setAddingView() {
+        with(binding) {
+            buttonEdit.visibility = View.GONE
+            buttonDelete.visibility = View.GONE
+            buttonSubmitDrugForm.visibility = View.VISIBLE
+            tvDrugFormTitle.text = getString(R.string.drug_add_new_title)
+            drugName.isEnabled = true
+            dose.isEnabled = true
+            doseInterval.isEnabled = true
+            doseTime.isEnabled = true
+
+            buttonSubmitDrugForm.setOnClickListener {
+                if (!validateDrugName() || !validateDose() || !validateDoseInterval() || !validateTime()) {
+                    return@setOnClickListener
+                }
+                saveDrug()
+            }
+        }
+    }
+
+    private fun setDetailsView() {
+        with(binding) {
+            val textColor = drugName.currentTextColor
+            buttonEdit.visibility = View.VISIBLE
+            buttonEdit.text = getString(R.string.edit)
+            buttonDelete.visibility = View.VISIBLE
+            buttonSubmitDrugForm.visibility = View.GONE
+            tvDrugFormTitle.text = getString(R.string.drug_details_title)
+            drugName.isEnabled = false
+            drugName.setTextColor(textColor)
+            dose.isEnabled = false
+            dose.setTextColor(textColor)
+            doseInterval.isEnabled = false
+            doseInterval.setTextColor(textColor)
+            doseTime.isEnabled = false
+            doseTime.setTextColor(textColor)
+
+            buttonEdit.setOnClickListener {
+                setEditView()
+            }
+
+            buttonDelete.setOnClickListener {
+                drug?.let {
+                    val deleteDialogBuilder = AlertDialog.Builder(activity).apply {
+                        setTitle(R.string.drug_delete_dialog_title)
+                        setMessage(R.string.drug_delete_dialog_message)
+                        setPositiveButton(R.string.delete) { _, _ ->
+                            drugActivity.drugViewModel.delete(it)
+                            drugActivity.supportFragmentManager.popBackStack()
+                        }
+                        setNegativeButton(R.string.cancel) { dialog, _ ->
+                            dialog.cancel()
+                        }
+                    }
+                    deleteDialogBuilder.show()
+                } ?: throw IllegalStateException("drug cannot be null")
+            }
+        }
+        printDrugInfo()
+    }
+
+    private fun setEditView() {
+        with(binding) {
+            buttonEdit.visibility = View.VISIBLE
+            buttonEdit.text = getString(R.string.cancel)
+            buttonDelete.visibility = View.VISIBLE
+            buttonSubmitDrugForm.visibility = View.VISIBLE
+            tvDrugFormTitle.text = getString(R.string.drug_edit_title)
+            drugName.isEnabled = true
+            dose.isEnabled = true
+            doseInterval.isEnabled = true
+            doseTime.isEnabled = true
+
+            buttonSubmitDrugForm.setOnClickListener {
+                if (!validateDrugName() || !validateDose() || !validateDoseInterval() || !validateTime()) {
+                    return@setOnClickListener
+                }
+                editDrug()
+            }
+
+            buttonEdit.setOnClickListener {
+                setDetailsView()
+            }
+        }
+    }
+
+    private fun printDrugInfo() {
+        drug?.let {
+            calendar.set(Calendar.HOUR_OF_DAY, it.hour)
+            calendar.set(Calendar.MINUTE, it.minute)
+        } ?: throw IllegalStateException("drug cannot be null")
+        binding.drugName.setText(drug?.name)
+        binding.dose.setText(drug?.dose.toString())
+        binding.doseInterval.setText(drug?.interval.toString())
+        displayFormattedDate(calendar.timeInMillis)
+    }
+
+    private fun setupDoseTimeListener() {
         binding.doseTime.setOnClickListener {
             TimePickerDialog(
                 /* context = */ requireActivity(),
@@ -96,6 +202,18 @@ class FragmentDrugForm : Fragment(), TimePickerDialog.OnTimeSetListener {
         val drug = Drug(drugName, dose, hour, minute, interval)
         drugActivity.drugViewModel.insert(drug)
         drugActivity.supportFragmentManager.popBackStack()
+    }
+
+    private fun editDrug() {
+        drug?.let {
+            it.name = binding.drugName.text.toString()
+            it.dose = binding.dose.text.toString().toInt()
+            it.interval = binding.doseInterval.text.toString().toInt()
+            it.hour = calendar.get(Calendar.HOUR_OF_DAY)
+            it.minute = calendar.get(Calendar.MINUTE)
+            drugActivity.drugViewModel.update(it)
+            drugActivity.supportFragmentManager.popBackStack()
+        } ?: throw IllegalStateException("drug cannot be null")
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
