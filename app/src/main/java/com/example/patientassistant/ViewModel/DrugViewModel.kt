@@ -9,27 +9,28 @@ import kotlinx.coroutines.launch
 class DrugViewModel(private val drugRepository: DrugRepository) : ViewModel() {
 
     val allDrugs: LiveData<List<Drug>> = drugRepository.allDrugs.asLiveData()
+    val todayDrugs: LiveData<List<Drug>> = drugRepository.todayDrugs.asLiveData()
 
-        fun insert(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
-            drugRepository.insert(drug)
-        }
+    fun insert(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
+        drugRepository.insert(drug)
+    }
 
-        fun update(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
-            drugRepository.update(drug)
-        }
+    fun update(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
+        drugRepository.update(drug)
+    }
 
-        fun delete(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
-            drugRepository.delete(drug)
-        }
+    fun delete(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
+        drugRepository.delete(drug)
+    }
 
-        fun deleteAllDrugs(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
-            drugRepository.deleteAllDrugs()
-        }
+    fun deleteAllDrugs(drug: Drug) = viewModelScope.launch(Dispatchers.IO) {
+        drugRepository.deleteAllDrugs()
+    }
 }
 
 class DrugViewModelFactory(private var repository: DrugRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(DrugViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(DrugViewModel::class.java)) {
             return DrugViewModel(repository) as T
         } else {
             throw java.lang.IllegalArgumentException("unknown View Model")

@@ -8,7 +8,10 @@ import kotlinx.coroutines.launch
 
 class AppointmentViewModel(private val appointmentRepository: AppointmentRepository) : ViewModel() {
 
-    val myAllAppointments : LiveData<List<Appointment>> = appointmentRepository.myAllAppointments.asLiveData()
+    val myAllAppointments: LiveData<List<Appointment>> =
+        appointmentRepository.myAllAppointments.asLiveData()
+    val todayAppointments: LiveData<List<Appointment>> =
+        appointmentRepository.todayAppointments.asLiveData()
 
     fun insert(appointment: Appointment) = viewModelScope.launch(Dispatchers.IO) {
         appointmentRepository.insert(appointment)
@@ -27,9 +30,10 @@ class AppointmentViewModel(private val appointmentRepository: AppointmentReposit
     }
 }
 
-class AppointmentViewModelFactory(private var repository: AppointmentRepository) : ViewModelProvider.Factory {
+class AppointmentViewModelFactory(private var repository: AppointmentRepository) :
+    ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(AppointmentViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(AppointmentViewModel::class.java)) {
             return AppointmentViewModel(repository) as T
         } else {
             throw java.lang.IllegalArgumentException("unknown View Model")
