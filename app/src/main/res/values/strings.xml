@@ -27,6 +27,18 @@
     <string name="edit">edit</string>
     <string name="cancel">Cancel</string>
     <string name="delete">delete</string>
+    <string name="hospitals">Hospitals</string>
+    <string name="pharmacies">Pharmacies</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="place_type">Place type</string>
+    <string name="doctors">Doctors</string>
+    <string name="dentists">Dentists</string>
+    <string name="drug_stores">Drug stores</string>
+    <string name="where_to_find_places">Where to find places</string>
+    <string name="my_localization">My location</string>
+    <string name="chosen_localization">Chosen location</string>
+    <string name="find_places">Find places</string>
+    <string name="type_location">Type location</string>
     <string name="drugs">Drugs</string>
     <string name="appointments">Appointments</string>
 
