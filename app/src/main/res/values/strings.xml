@@ -18,4 +18,6 @@
     <string name="hint_select_date">Time of first dose</string>
     <string name="hint_dose_interval">Dose interval</string>
     <string name="submit">Submit</string>
+    <string name="hospitals">Hospitals</string>
+    <string name="pharmacies">Pharmacies</string>
 </resources>
