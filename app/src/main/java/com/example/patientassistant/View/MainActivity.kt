@@ -59,6 +59,12 @@ class MainActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     return@setOnItemSelectedListener true
                 }
+                R.id.map -> {
+                    Log.i("Menu", "Map selected")
+                    startActivity(Intent(this, MapActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    return@setOnItemSelectedListener true
+                }
             }
             return@setOnItemSelectedListener false
         }

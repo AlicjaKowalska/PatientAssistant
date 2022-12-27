@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <application
@@ -12,23 +14,23 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PatientAssistant"
-        tools:targetApi="31">
-        <activity android:name=".View.MedicalAppointmentFormActivity" />
+        android:theme="@style/Theme.PatientAssistant">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
+        <activity android:name=".View.MapActivity" />
         <activity android:name=".View.MedicalAppointmentsActivity" />
-        <activity android:name=".View.DrugActivity" />
+        <activity android:name=".View.MedicalAppointmentFormActivity" />
+        <activity android:name=".View.DrugActivity"/>
         <activity
             android:name=".View.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
         <receiver android:name=".BroadcastReceivers.MedicalAppointmentReceiver"
             android:exported="false">
