@@ -2,8 +2,11 @@ package com.example.patientassistant.View
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.android.volley.Request
@@ -114,6 +117,26 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         } else {
             val position = LatLng(lat, lng)
             mMap.moveCamera(CameraUpdateFactory.newLatLng(position))
+        }
+
+        mMap.setOnMarkerClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Navigate to")
+            builder.setMessage(it.title)
+
+            builder.setPositiveButton("ok") {
+                dialog, which ->
+                val gmmIntentUri = Uri.parse("google.navigation:q=${it.position.latitude},${it.position.longitude}")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
+            }
+            builder.setNegativeButton("cancel") {
+                dialog, which ->
+                dialog.dismiss()
+            }
+            builder.show()
+            true
         }
     }
 
