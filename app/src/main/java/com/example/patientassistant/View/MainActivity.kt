@@ -18,8 +18,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val appointmentViewModelFactory = AppointmentViewModelFactory((application as PatientApplication).appointmentRepository)
+        val appointmentViewModelFactory =
+            AppointmentViewModelFactory((application as PatientApplication).appointmentRepository)
 
-        appointmentViewModel = ViewModelProvider(this, appointmentViewModelFactory)[AppointmentViewModel::class.java]
+        appointmentViewModel =
+            ViewModelProvider(this, appointmentViewModelFactory)[AppointmentViewModel::class.java]
     }
 }
