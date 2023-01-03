@@ -13,5 +13,5 @@ class PatientApplication : Application() {
 
     val database by lazy { PatientDatabase.getDataBase(this, applicationScope) } //by lazy means that an instance of the database will be created only when the application is first needed, not every time it runs
     val drugRepository by lazy { DrugRepository(database.getDrugDao()) }
-    val appointmentRepository by lazy { AppointmentRepository(database.getAppointmentDao()) }
+    val appointmentRepository by lazy { AppointmentRepository(this, database.getAppointmentDao()) }
 }

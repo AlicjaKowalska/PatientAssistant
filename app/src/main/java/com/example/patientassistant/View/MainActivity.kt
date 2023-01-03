@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         appointmentViewModel =
             ViewModelProvider(this, appointmentViewModelFactory)[AppointmentViewModel::class.java]
 
-        appointmentViewModel = ViewModelProvider(this, appointmentViewModelFactory)[AppointmentViewModel::class.java]
         binding.bottomNavigation.selectedItemId = R.id.home
         binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
