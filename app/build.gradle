@@ -45,6 +45,8 @@ android {
 dependencies {
     def fragment_version = "1.5.5"
 
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
+
     // Kotlin
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
