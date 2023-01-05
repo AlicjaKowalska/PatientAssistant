@@ -6,6 +6,7 @@ import com.example.patientassistant.Handlers.AppointmentNotificationsHandler
 import com.example.patientassistant.Model.Appointment
 import com.example.patientassistant.Room.AppointmentDAO
 import kotlinx.coroutines.flow.Flow
+import java.util.*
 
 class AppointmentRepository(
     private val context: Context,
@@ -14,6 +15,12 @@ class AppointmentRepository(
 
     val myAllAppointments: Flow<List<Appointment>> = appointmentDAO.getAllAppointments()
     val appointmentNotificationHandler = AppointmentNotificationsHandler(context)
+    private val calendar = Calendar.getInstance()
+    private val year = calendar.get(Calendar.YEAR)
+    private val month = calendar.get(Calendar.MONTH) + 1 // Calendar month is 0-based
+    private val day = calendar.get(Calendar.DAY_OF_MONTH)
+    val todayAppointments: Flow<List<Appointment>> =
+        appointmentDAO.todayAppointments(year, month, day)
 
     @WorkerThread //annotations can be done in a single thread
     suspend fun insert(appointment: Appointment) {

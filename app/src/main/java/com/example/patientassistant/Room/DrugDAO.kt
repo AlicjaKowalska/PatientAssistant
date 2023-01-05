@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.Flow
 interface DrugDAO {
 
     @Insert
-    suspend fun insert(drug : Drug)
+    suspend fun insert(drug: Drug)
 
     @Update
-    suspend fun update(drug : Drug)
+    suspend fun update(drug: Drug)
 
     @Delete
     suspend fun delete(drug: Drug)
@@ -26,5 +26,8 @@ interface DrugDAO {
 
     @Query("SELECT * FROM drug_table ORDER BY id ASC")
     fun getAllDrugs(): Flow<List<Drug>>
+
+    @Query("SELECT * FROM drug_table ORDER BY hour, minute ASC")
+    fun todayDrugs(): Flow<List<Drug>>
 
 }

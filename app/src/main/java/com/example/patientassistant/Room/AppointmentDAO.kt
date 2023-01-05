@@ -12,10 +12,13 @@ interface AppointmentDAO {
     suspend fun insert(appointment: Appointment)
 
     @Query("SELECT * FROM appointment_table ORDER BY id ASC")
-    fun getAllAppointments() : Flow<List<Appointment>>
+    fun getAllAppointments(): Flow<List<Appointment>>
 
     @Update
     suspend fun update(appointment: Appointment)
+
+    @Query("SELECT * FROM appointment_table WHERE year=:yearToday AND month=:monthToday AND day=:dayToday ORDER BY year, month, day, hour, minute ASC")
+    fun todayAppointments(yearToday: Int, monthToday: Int, dayToday: Int): Flow<List<Appointment>>
 
     @Delete
     suspend fun delete(appointment: Appointment)

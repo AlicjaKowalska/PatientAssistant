@@ -27,6 +27,8 @@
     <string name="edit">edit</string>
     <string name="cancel">Cancel</string>
     <string name="delete">delete</string>
+    <string name="drugs">Drugs</string>
+    <string name="appointments">Appointments</string>
 
     <string name="appointment_reminders">Appointment Reminders</string>
     <string name="appointment_coming_up">You have an appointment coming up</string>

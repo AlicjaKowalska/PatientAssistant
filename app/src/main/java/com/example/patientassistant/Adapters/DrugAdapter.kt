@@ -11,7 +11,7 @@ import com.example.patientassistant.databinding.DrugItemBinding
 class DrugAdapter(private val clickListener: (Drug) -> Unit) : RecyclerView.Adapter<DrugAdapter.DrugViewHolder>() {
 
     lateinit var context: Context
-    private var drugs: List<Drug> = ArrayList()
+    var drugs: List<Drug> = ArrayList()
 
     inner class DrugViewHolder(val binding: DrugItemBinding) : RecyclerView.ViewHolder(binding.root)
 
