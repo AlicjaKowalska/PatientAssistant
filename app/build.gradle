@@ -58,7 +58,6 @@ dependencies {
     implementation "androidx.fragment:fragment:$fragment_version"
 
     implementation "androidx.core:core:$core_version"
-    implementation "androidx.work:work:$work_version"
     implementation "androidx.work:work-runtime-ktx:$work_version"
     implementation 'androidx.hilt:hilt-work:1.0.0'
 
