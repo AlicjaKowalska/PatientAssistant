@@ -30,6 +30,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <receiver android:name=".BroadcastReceivers.MedicalAppointmentReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.alarm" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
