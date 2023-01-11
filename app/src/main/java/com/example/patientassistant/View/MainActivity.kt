@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.patientassistant.Adapters.AppointmentAdapter
 import com.example.patientassistant.Adapters.DrugAdapter
-import com.example.patientassistant.Model.Appointment
 import com.example.patientassistant.PatientApplication
 import com.example.patientassistant.R
 import com.example.patientassistant.ViewModel.AppointmentViewModel
@@ -91,9 +90,6 @@ class MainActivity : AppCompatActivity() {
 
         appointmentViewModel =
             ViewModelProvider(this, appointmentViewModelFactory)[AppointmentViewModel::class.java]
-
-        val appointment = Appointment("Dentist", 4,1,2023, "Załom, Polna 3", 16, 30)
-        appointmentViewModel.insert(appointment)
 
         appointmentViewModel.todayAppointments.observe(this) { appointment ->
             //update UI
